@@ -1,6 +1,6 @@
-import { colors, fontSize } from "@/constants/tokens"
-import { Tabs } from "expo-router"
-import { FontAwesome } from "@expo/vector-icons"
+import { colors, fontSize } from "@/constants/tokens";
+import { Tabs } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
 export default function TabsNavigationLayout() {
     return (
         <Tabs
@@ -32,5 +32,5 @@ export default function TabsNavigationLayout() {
                 }}
             />
         </Tabs>
-    )
+    );
 }

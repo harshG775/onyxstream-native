@@ -1,5 +1,5 @@
-import { colors, fontSize } from "@/constants/tokens"
-import { StyleSheet } from "react-native"
+import { colors, fontSize } from "@/constants/tokens";
+import { StyleSheet } from "react-native";
 
 export const defaultStyles = StyleSheet.create({
     container: {
@@ -10,7 +10,7 @@ export const defaultStyles = StyleSheet.create({
         fontSize: fontSize.base,
         color: colors.text,
     },
-})
+});
 
 export const utilsStyles = StyleSheet.create({
     centeredRow: {
@@ -40,4 +40,4 @@ export const utilsStyles = StyleSheet.create({
         marginTop: 40,
         opacity: 0.3,
     },
-})
+});
