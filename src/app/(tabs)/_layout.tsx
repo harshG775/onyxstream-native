@@ -12,16 +12,18 @@ export default function TabsNavigationLayout() {
                 },
                 headerShown: false,
                 tabBarStyle: {
-                    position: "absolute",
-                    borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20,
+                    // position: "absolute",
+                    // borderTopLeftRadius: 20,
+                    // borderTopRightRadius: 20,
                     borderTopWidth: 0,
+                    // borderTopColor: colors.primary,
                     paddingTop: 8,
+                    backgroundColor: colors.background,
                 },
             }}
         >
             <Tabs.Screen
-                name="index"
+                name="(index)"
                 options={{
                     title: "Home",
                     tabBarIcon: ({ color }) => (
