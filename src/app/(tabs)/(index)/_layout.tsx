@@ -1,22 +1,21 @@
-import { StackScreenWithSearchBar } from "@/constants/layout";
-import { colors } from "@/constants/tokens";
-import { defaultStyles } from "@/styles";
+import { useThemeColor } from "@/components/ui/Themed";
 import { Stack } from "expo-router";
 import { View } from "react-native";
 
 export default function HomeScreenLayout() {
+    const text = useThemeColor({}, "text");
+    const primaryColor = useThemeColor({}, "primary");
     return (
-        <View style={defaultStyles.container}>
+        <View style={{ flex: 1 }}>
             <Stack
                 screenOptions={{
-                    headerTintColor: colors.text,
-                    headerStyle: { backgroundColor: colors.primary },
+                    headerTintColor: text,
+                    headerStyle: { backgroundColor: primaryColor },
                 }}
             >
                 <Stack.Screen
                     name="index"
                     options={{
-                        ...StackScreenWithSearchBar,
                         headerTitle: "Home",
                     }}
                 />

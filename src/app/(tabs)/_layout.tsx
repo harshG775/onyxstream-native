@@ -1,11 +1,14 @@
-import { colors, fontSize } from "@/constants/tokens";
+import { fontSize } from "@/constants/styles.constants";
 import { Tabs } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
+import { useThemeColor } from "@/components/ui/Themed";
 export default function TabsNavigationLayout() {
+    const background = useThemeColor({}, "background");
+    const primaryColor = useThemeColor({}, "primary");
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: colors.primary,
+                tabBarActiveTintColor: primaryColor,
                 tabBarLabelStyle: {
                     fontSize: fontSize.xs,
                     fontWeight: "500",
@@ -18,7 +21,7 @@ export default function TabsNavigationLayout() {
                     borderTopWidth: 0,
                     // borderTopColor: colors.primary,
                     paddingTop: 8,
-                    backgroundColor: colors.background,
+                    backgroundColor: background,
                 },
             }}
         >
