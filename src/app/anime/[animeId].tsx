@@ -3,6 +3,7 @@ import { Text, View } from "@/components/ui/Themed";
 import { fontSize } from "@/constants/styles.constants";
 import { InfoMedia } from "@/services/aniList/aniListTypes";
 import { useGetInfo } from "@/services/aniList/queries.tanstack";
+import { purifyDescriptionToArray } from "@/utils/purifyDescriptionToArray";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useLayoutEffect } from "react";
 import { Image } from "react-native";
@@ -48,7 +49,8 @@ function AnimeInfoScreen({ data }: { data: InfoMedia }) {
                 {data.title.userPreferred}
             </Text>
             <EllipseText numberOfLines={4} title={"Description"}>
-                {data.description}
+                {/* {data.description} */}
+                {purifyDescriptionToArray(data.description || "").map((e) => e)}
             </EllipseText>
         </View>
     );
