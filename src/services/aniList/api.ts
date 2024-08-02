@@ -1,6 +1,6 @@
 import { env } from "@/constants/env";
 import axios from "axios";
-import { InfoMedia } from "./aniListTypes";
+import { InfoMedia, TrendingReleasingPage } from "./aniListTypes";
 
 const { EXPO_PUBLIC_AL_BASEURL_QL } = env;
 export const axiosAL = axios.create({
@@ -71,4 +71,41 @@ export async function getInfoById(id: string): Promise<InfoMedia> {
         }
     `);
     return data.data.data.Media;
+}
+export async function TrendingReleasing(
+    page: number,
+    perPage: number,
+): Promise<TrendingReleasingPage> {
+    const data = await ALClient(`
+        {
+            Page(page: ${page}, perPage: ${perPage}) {
+                media(sort: TRENDING_DESC, type: ANIME, status: RELEASING, isAdult: false) {
+                    id
+                    episodes
+                    coverImage {
+                        large
+                        color
+                    }
+                    averageScore
+                    popularity
+                    title {
+                        romaji
+                        english
+                        userPreferred
+                        native
+                    }
+                    format
+                    genres
+                }
+                pageInfo {
+                    total
+                    perPage
+                    currentPage
+                    lastPage
+                    hasNextPage
+                }
+            }
+        }
+    `);
+    return data.data.data.Page;
 }

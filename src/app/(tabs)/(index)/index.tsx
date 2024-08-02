@@ -1,10 +1,12 @@
 import { Text, View } from "@/components/ui/Themed";
-import { useGetRecentEpisodes } from "@/services/gogoanime/queries.tanstack";
+import { TrendingReleasingMedia } from "@/services/aniList/aniListTypes";
+import { useGetTrendingReleasing } from "@/services/aniList/queries.tanstack";
+// import { useGetRecentEpisodes } from "@/services/gogoanime/queries.tanstack";
 import { Link } from "expo-router";
 import { StyleSheet, Image, FlatList, TouchableHighlight } from "react-native";
 // import { Image } from "expo-image";
 export default function HomeScreen() {
-    const { data, status, error } = useGetRecentEpisodes();
+    const { data, status, error } = useGetTrendingReleasing();
     if (status === "error") console.log(error);
     return (
         <View>
@@ -13,7 +15,7 @@ export default function HomeScreen() {
             {status === "success" && (
                 <FlatList
                     horizontal={false}
-                    data={data.results}
+                    data={data.media}
                     renderItem={({ item, index }) => (
                         <AnimeListItem anime={item} key={index} />
                     )}
@@ -22,9 +24,9 @@ export default function HomeScreen() {
         </View>
     );
 }
-function AnimeListItem({ anime }: any) {
+function AnimeListItem({ anime }: { anime: TrendingReleasingMedia }) {
     return (
-        <Link asChild href={`/anime/21`}>
+        <Link asChild href={`/anime/${anime.id}`}>
             <TouchableHighlight
                 activeOpacity={0.6}
                 underlayColor={"red"}
@@ -34,10 +36,10 @@ function AnimeListItem({ anime }: any) {
                     <View>
                         <Image
                             style={styles.image}
-                            source={{ uri: anime.image }}
+                            source={{ uri: anime.coverImage.large || "" }}
                         />
                     </View>
-                    <Text>{anime.title}</Text>
+                    <Text>{anime.title.userPreferred}</Text>
                 </View>
             </TouchableHighlight>
         </Link>

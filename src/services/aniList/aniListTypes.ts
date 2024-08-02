@@ -48,3 +48,32 @@ export type InfoMedia = {
         mediaId: number;
     } | null;
 };
+
+export type TrendingReleasingMedia = {
+    id: number;
+    episodes: number | null;
+    coverImage: {
+        large: string | null;
+        color: string | null;
+    };
+    averageScore: number | null;
+    popularity: number | null;
+    title: {
+        romaji: string | null;
+        english: string | null;
+        userPreferred: string | null;
+        native: string | null;
+    };
+    format: string | null;
+    genres: string[];
+};
+export type TrendingReleasingPage = {
+    media: TrendingReleasingMedia[];
+    pageInfo: {
+        total: number;
+        perPage: number;
+        currentPage: number;
+        lastPage: number;
+        hasNextPage: boolean;
+    };
+};
