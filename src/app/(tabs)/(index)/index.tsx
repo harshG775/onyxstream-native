@@ -4,7 +4,7 @@ import { Link } from "expo-router";
 import { StyleSheet, Image, FlatList, TouchableHighlight } from "react-native";
 // import { Image } from "expo-image";
 export default function HomeScreen() {
-    const { data, status, error, refetch } = useGetRecentEpisodes();
+    const { data, status, error } = useGetRecentEpisodes();
     if (status === "error") console.log(error);
     return (
         <View>
@@ -24,7 +24,7 @@ export default function HomeScreen() {
 }
 function AnimeListItem({ anime }: any) {
     return (
-        <Link asChild href={`/(tabs)/anime`}>
+        <Link asChild href={`/anime/${anime.id}`}>
             <TouchableHighlight
                 activeOpacity={0.6}
                 underlayColor={"red"}
