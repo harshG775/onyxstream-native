@@ -7,7 +7,10 @@ function RootNavigation() {
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen
                 name="anime/[animeId]"
-                options={{ headerShown: true, animation: "slide_from_bottom" }}
+                options={{
+                    headerShown: true,
+                    animation: "fade_from_bottom",
+                }}
             />
         </Stack>
     );

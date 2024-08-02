@@ -24,7 +24,7 @@ export default function HomeScreen() {
 }
 function AnimeListItem({ anime }: any) {
     return (
-        <Link asChild href={`/anime/${anime.id}`}>
+        <Link asChild href={`/anime/21`}>
             <TouchableHighlight
                 activeOpacity={0.6}
                 underlayColor={"red"}
