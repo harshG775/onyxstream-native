@@ -1,4 +1,6 @@
+import { EllipseText } from "@/components/ui/EllipseText";
 import { Text, View } from "@/components/ui/Themed";
+import { fontSize } from "@/constants/styles.constants";
 import { InfoMedia } from "@/services/aniList/aniListTypes";
 import { useGetInfo } from "@/services/aniList/queries.tanstack";
 import { useLocalSearchParams, useNavigation } from "expo-router";
@@ -42,10 +44,12 @@ function AnimeInfoScreen({ data }: { data: InfoMedia }) {
                 source={{ uri: data.bannerImage || "" }}
                 style={{ width: "100%", height: 100 }}
             />
-            <Text style={{ fontWeight: "800", fontSize: 24 }}>
+            <Text style={{ fontWeight: "800", ...fontSize._Xl }}>
                 {data.title.userPreferred}
             </Text>
-            <Text>{data.description}</Text>
+            <EllipseText numberOfLines={4} title={"Description"}>
+                {data.description}
+            </EllipseText>
         </View>
     );
 }

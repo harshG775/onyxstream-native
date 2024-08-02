@@ -10,7 +10,7 @@ export default function TabsNavigationLayout() {
             screenOptions={{
                 tabBarActiveTintColor: primaryColor,
                 tabBarLabelStyle: {
-                    fontSize: fontSize.xs,
+                    ...fontSize._Sm,
                     fontWeight: "500",
                 },
                 headerShown: false,
