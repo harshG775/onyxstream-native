@@ -1,7 +1,7 @@
 import { fontSize } from "@/constants/styles.constants";
 import { Tabs } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
-import { useThemeColor } from "@/components/ui/Themed";
+import { useThemeColor } from "@/hooks/useThemeColor";
 export default function TabsNavigationLayout() {
     const background = useThemeColor({}, "background");
     const primaryColor = useThemeColor({}, "primary");

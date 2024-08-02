@@ -9,8 +9,7 @@ import {
     ScrollView as DefaultScrollView,
 } from "react-native";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { colors } from "@/constants/styles.constants";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 type ThemeProps = {
     lightColor?: string;
@@ -20,20 +19,6 @@ type ThemeProps = {
 export type TextProps = ThemeProps & DefaultText["props"];
 export type ViewProps = ThemeProps & DefaultView["props"];
 export type ScrollViewProps = ThemeProps & DefaultView["props"];
-
-export function useThemeColor(
-    props: { light?: string; dark?: string },
-    colorName: keyof typeof colors.light & keyof typeof colors.dark,
-) {
-    const theme = useColorScheme() ?? "light";
-    const colorFromProps = props[theme];
-
-    if (colorFromProps) {
-        return colorFromProps;
-    } else {
-        return colors[theme][colorName];
-    }
-}
 
 export function Text(props: TextProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;

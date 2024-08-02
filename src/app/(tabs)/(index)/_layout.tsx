@@ -1,4 +1,4 @@
-import { useThemeColor } from "@/components/ui/Themed";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import { Stack } from "expo-router";
 import { View } from "react-native";
 
