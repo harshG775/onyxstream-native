@@ -6,7 +6,7 @@ type ThemeProps = PropsWithChildren & {
 
 export default function BottomSheetDrawer(props: ThemeProps) {
     const { index = 0, children } = props;
-    const snapPoints = useMemo(() => ["12%", "50%", "98%"], []);
+    const snapPoints = useMemo(() => ["12%", "80%"], []);
     return (
         <BottomSheet
             snapPoints={snapPoints}

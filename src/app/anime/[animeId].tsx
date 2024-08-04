@@ -1,3 +1,4 @@
+import EpisodesDrawer from "@/components/screenComponents/info/EpisodesDrawer";
 import { EllipseText } from "@/components/ui/EllipseText";
 import { Text, View, ScrollView } from "@/components/ui/Themed";
 import { fontSize } from "@/constants/styles.constants";
@@ -57,44 +58,7 @@ function AnimeInfoScreen({ data }: { data: InfoMedia }) {
                 </EllipseText>
                 <View style={{ height: 100 }}></View>
             </ScrollView>
-            <Episodes />
+            <EpisodesDrawer animeId="" title={data.title} />
         </>
-    );
-}
-
-import BottomSheetDrawer from "@/components/ui/BottomSheetDrawer";
-function Episodes() {
-    const Episodes = [
-        {
-            episode: "1",
-        },
-        {
-            episode: "2",
-        },
-        {
-            episode: "3",
-        },
-        {
-            episode: "4",
-        },
-    ];
-    return (
-        <BottomSheetDrawer>
-            <View style={{ flex: 1 }} darkColor="#111" lightColor="#eee">
-                <Text style={{ ...fontSize._Xl, padding: 6 }}>Episodes</Text>
-                <ScrollView>
-                    {Episodes.map((ep) => (
-                        <View
-                            key={ep.episode}
-                            style={{
-                                padding: 30,
-                            }}
-                        >
-                            <Text>Episodes-{ep.episode}</Text>
-                        </View>
-                    ))}
-                </ScrollView>
-            </View>
-        </BottomSheetDrawer>
     );
 }
