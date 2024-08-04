@@ -1,4 +1,5 @@
 import EpisodesDrawer from "@/components/screenComponents/info/EpisodesDrawer";
+import Genres from "@/components/screenComponents/info/Genres";
 import { EllipseText } from "@/components/ui/EllipseText";
 import { Text, View, ScrollView } from "@/components/ui/Themed";
 import { fontSize } from "@/constants/styles.constants";
@@ -45,17 +46,26 @@ function AnimeInfoScreen({ data }: { data: InfoMedia }) {
             <ScrollView>
                 <Image
                     source={{ uri: data.bannerImage || "" }}
-                    style={{ width: "100%", height: 100 }}
+                    style={{ width: "100%", height: 120 }}
                 />
-                <Text style={{ fontWeight: "800", ...fontSize._Xl }}>
-                    {data.title.userPreferred}
-                </Text>
-                <EllipseText numberOfLines={4} title={"Description"}>
-                    {/* {data.description} */}
-                    {purifyDescriptionToArray(data.description || "").map(
-                        (e) => e,
-                    )}
-                </EllipseText>
+                <View style={{ padding: 8 }}>
+                    <Image
+                        source={{ uri: data.coverImage.large || "" }}
+                        style={{ width: 150, height: 200 }}
+                    />
+                    <Text style={{ fontWeight: "800", ...fontSize._Xl }}>
+                        {data.title.userPreferred}
+                    </Text>
+                    <Genres genres={data.genres} />
+                    <EllipseText numberOfLines={4} title={"Description"}>
+                        {/* {data.description} */}
+                        {purifyDescriptionToArray(data.description || "").map(
+                            (e) => e,
+                        )}
+                    </EllipseText>
+                </View>
+
+                {/* Divider */}
                 <View style={{ height: 100 }}></View>
             </ScrollView>
             <EpisodesDrawer animeId="" title={data.title} />
