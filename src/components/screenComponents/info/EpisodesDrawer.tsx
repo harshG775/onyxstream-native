@@ -25,7 +25,6 @@ export default function EpisodesDrawer(props: EpisodesDrawerProps) {
         queryKey: [`info-${toUrlString(title.romaji + dubSub)}`],
         queryFn: () => getInfo(toUrlString(title.romaji + dubSub)),
     });
-    console.log(data);
     return (
         <BottomSheetDrawer>
             <View style={{ flex: 1 }} darkColor="#111" lightColor="#eee">

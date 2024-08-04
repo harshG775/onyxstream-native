@@ -25,7 +25,7 @@ export function EllipseText({
                 <Text
                     style={{
                         fontWeight: "bold",
-                        ...fontSize._Xl
+                        ...fontSize._Xl,
                     }}
                 >
                     {title}
@@ -41,9 +41,11 @@ export function EllipseText({
                 </Text>
             </View>
             {ellipse ? (
-                <Text numberOfLines={numberOfLines}>{children}</Text>
+                <Text numberOfLines={numberOfLines} selectable={true}>
+                    {children}
+                </Text>
             ) : (
-                <Text>{children}</Text>
+                <Text selectable={true}>{children}</Text>
             )}
         </View>
     );

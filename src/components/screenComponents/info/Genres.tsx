@@ -21,6 +21,7 @@ export default function Genres({ genres }: { genres: string[] }) {
                         darkColor="#111"
                         lightColor="#eee"
                         style={{ fontWeight: "700" }}
+                        selectable={true}
                     >
                         {genre}
                     </Text>
