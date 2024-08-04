@@ -1,6 +1,7 @@
 import EpisodesDrawer from "@/components/screenComponents/info/EpisodesDrawer";
 import Genres from "@/components/screenComponents/info/Genres";
 import { EllipseText } from "@/components/ui/EllipseText";
+import ParallaxScrollView from "@/components/ui/ParallaxScrollView";
 import { Text, View, ScrollView } from "@/components/ui/Themed";
 import { fontSize } from "@/constants/styles.constants";
 import { InfoMedia } from "@/services/aniList/aniListTypes";
@@ -43,12 +44,18 @@ function AnimeInfoScreen({ data }: { data: InfoMedia }) {
     }, [navigation, data.title.userPreferred]);
     return (
         <>
-            <ScrollView>
-                <Image
-                    source={{ uri: data.bannerImage || "" }}
-                    style={{ width: "100%", height: 120 }}
-                />
-                <View style={{ padding: 8 }}>
+            <ParallaxScrollView
+                headerBackgroundColor={{ light: "#eee", dark: "#222" }}
+                headerImage={
+                    <Image
+                        source={{
+                            uri: data.bannerImage || data.coverImage.extraLarge,
+                        }}
+                        style={{ width: "100%", height: "100%" }}
+                    />
+                }
+            >
+                <View style={{ flex: 1, padding: 8, height: "100%" }}>
                     <Image
                         source={{ uri: data.coverImage.large || "" }}
                         style={{ width: 150, height: 200 }}
@@ -67,7 +74,7 @@ function AnimeInfoScreen({ data }: { data: InfoMedia }) {
 
                 {/* Divider */}
                 <View style={{ height: 100 }}></View>
-            </ScrollView>
+            </ParallaxScrollView>
             <EpisodesDrawer animeId="" title={data.title} />
         </>
     );
