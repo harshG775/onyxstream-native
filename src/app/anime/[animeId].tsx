@@ -55,7 +55,7 @@ function AnimeInfoScreen({ data }: { data: InfoMedia }) {
                     />
                 }
             >
-                <View style={{ flex: 1, padding: 8, height: "100%" }}>
+                <View style={{ flex: 1, padding: 8 }}>
                     <Image
                         source={{ uri: data.coverImage.large || "" }}
                         style={{ width: 150, height: 200 }}
