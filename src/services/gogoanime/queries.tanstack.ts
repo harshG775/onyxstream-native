@@ -4,6 +4,7 @@ import {
     getInfo,
     getRecentEpisodes,
     getSearchResult,
+    getStreamingLinks,
     getTopAiring,
 } from "./api";
 
@@ -34,6 +35,12 @@ export const useGetInfo = (id: string) => {
 };
 
 export const useGetAvailableServers = (episodeId: string) => {
+    return useQuery({
+        queryKey: [`availableServers-${episodeId}`],
+        queryFn: () => getStreamingLinks(episodeId,"gogocdn"),
+    });
+};
+export const useGetGetStreamingLinks = (episodeId: string) => {
     return useQuery({
         queryKey: [`availableServers-${episodeId}`],
         queryFn: () => getAvailableServers(episodeId),

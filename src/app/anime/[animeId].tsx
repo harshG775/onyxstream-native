@@ -2,7 +2,7 @@ import EpisodesDrawer from "@/components/screenComponents/info/EpisodesDrawer";
 import Genres from "@/components/screenComponents/info/Genres";
 import { EllipseText } from "@/components/ui/EllipseText";
 import ParallaxScrollView from "@/components/ui/ParallaxScrollView";
-import { ScrollView, Text, View } from "@/components/ui/Themed";
+import { Text, View } from "@/components/ui/Themed";
 import { fontSize } from "@/constants/styles.constants";
 import { InfoMedia } from "@/services/aniList/aniListTypes";
 import { useGetInfo } from "@/services/aniList/queries.tanstack";
@@ -92,7 +92,9 @@ function AnimeInfoScreen({ data }: { data: InfoMedia }) {
                             <Text style={{ fontWeight: "600" }}>
                                 User Preferred
                             </Text>
-                            <Text selectable={true}>{data.title.userPreferred}</Text>
+                            <Text selectable={true}>
+                                {data.title.userPreferred}
+                            </Text>
                         </InfoItem>
                         <InfoItem>
                             <Text style={{ fontWeight: "600" }}>Formate</Text>

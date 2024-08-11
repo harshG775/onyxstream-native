@@ -7,7 +7,8 @@ import { toUrlString } from "@/utils/toUrlString";
 import { getInfo } from "@/services/gogoanime/api";
 import { useQuery } from "@tanstack/react-query";
 import { PropsWithChildren, useState } from "react";
-import { Button } from "react-native";
+import { Button, Pressable } from "react-native";
+import VideoPlayer from "./VideoPlayer";
 
 type EpisodesDrawerProps = {
     animeId: string;
@@ -19,6 +20,7 @@ type EpisodesDrawerProps = {
     };
 };
 export default function EpisodesDrawer(props: EpisodesDrawerProps) {
+    const [currentEpisode, setCurrentEpisode] = useState("");
     const [dubSub, setDubSub] = useState("");
     const { title } = props;
     const { data, status } = useQuery({
@@ -28,7 +30,8 @@ export default function EpisodesDrawer(props: EpisodesDrawerProps) {
     return (
         <BottomSheetDrawer>
             <View style={{ flex: 1 }} darkColor="#111" lightColor="#eee">
-                <BottomSheetView>
+                <BottomSheetView style={{ flex: 1 }}>
+                    <VideoPlayer epId={currentEpisode} />
                     <View
                         style={{
                             height: 60,
@@ -45,7 +48,7 @@ export default function EpisodesDrawer(props: EpisodesDrawerProps) {
                                 ...fontSize._Xl,
                             }}
                         >
-                            Episodes
+                            Episodes:{currentEpisode}
                         </Text>
                         <View style={{ display: "flex", flexDirection: "row" }}>
                             <Button
@@ -61,7 +64,7 @@ export default function EpisodesDrawer(props: EpisodesDrawerProps) {
                         </View>
                     </View>
                 </BottomSheetView>
-                <BottomSheetScrollView>
+                <BottomSheetScrollView style={{ flex: 1 }}>
                     {status === "pending" && (
                         <View
                             style={{ display: "flex", gap: 4 }}
@@ -78,9 +81,7 @@ export default function EpisodesDrawer(props: EpisodesDrawerProps) {
                                             display: "flex",
                                             alignItems: "center",
                                         }}
-                                    >
-                                        <Text>Episodes...</Text>
-                                    </View>
+                                    ></View>
                                 ))}
                         </View>
                     )}
@@ -92,16 +93,17 @@ export default function EpisodesDrawer(props: EpisodesDrawerProps) {
                             lightColor="#eee"
                         >
                             {data.episodes.map((ep) => (
-                                <View
+                                <Pressable
                                     key={ep.id}
                                     style={{
                                         padding: 30,
                                         display: "flex",
                                         alignItems: "center",
                                     }}
+                                    onPress={() => setCurrentEpisode(ep.id)}
                                 >
                                     <Text>Episodes-{ep.number}</Text>
-                                </View>
+                                </Pressable>
                             ))}
                         </View>
                     )}
