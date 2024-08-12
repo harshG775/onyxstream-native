@@ -2,14 +2,15 @@ import { Text, View } from "@/components/ui/Themed";
 import BottomSheetDrawer from "@/components/ui/BottomSheetDrawer";
 import { fontSize } from "@/constants/styles.constants";
 import { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
-import { useGetInfo } from "@/services/gogoanime/queries.tanstack";
 import { toUrlString } from "@/utils/toUrlString";
 import { getInfo, getSearchResult } from "@/services/gogoanime/api";
-import { useQuery } from "@tanstack/react-query";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Pressable } from "react-native";
 import VideoPlayer from "./VideoPlayer";
-import { AnimeInfoResponseType } from "@/services/gogoanime/GogoAnimeTypes";
+import {
+    AnimeInfoResponseType,
+    EpisodesInfoType,
+} from "@/services/gogoanime/GogoAnimeTypes";
 
 type EpisodesDrawerProps = {
     animeId: string;
@@ -27,7 +28,8 @@ export default function EpisodesDrawer({ title }: EpisodesDrawerProps) {
     const [error, setError] = useState<unknown>();
     const [data, setAnime] = useState<AnimeInfoResponseType>();
     //
-    const [currentEpisode, setCurrentEpisode] = useState("");
+    const [currentEpisode, setCurrentEpisode] =
+        useState<EpisodesInfoType | null>(null);
     const [dubSub, setDubSub] = useState("");
     //
     useEffect(() => {
@@ -38,10 +40,10 @@ export default function EpisodesDrawer({ title }: EpisodesDrawerProps) {
 
                 let result;
                 try {
-                    result = await getInfo(toUrlString(title.romaji + ""));
+                    result = await getInfo(toUrlString(title.romaji + dubSub));
                 } catch (error) {
                     const resp = await getSearchResult(
-                        toUrlString(title.english + ""),
+                        toUrlString(title.english + dubSub),
                     );
                     result = await getInfo(
                         toUrlString(resp.results[0].id + ""),
@@ -56,19 +58,15 @@ export default function EpisodesDrawer({ title }: EpisodesDrawerProps) {
             }
         };
         fetchMe();
-    }, [title.romaji]);
+    }, [title.romaji, dubSub]);
 
     return (
         <BottomSheetDrawer>
-            <BottomSheetView style={{ height: 200, width: "100%" }}>
-                {currentEpisode ? (
-                    <VideoPlayer epId={currentEpisode} />
-                ) : (
-                    <View
-                        style={{ backgroundColor: "#333", height: 200 }}
-                    ></View>
-                )}
-            </BottomSheetView>
+            {currentEpisode && (
+                <BottomSheetView style={{ height: 200, width: "100%" }}>
+                    <VideoPlayer epId={currentEpisode.id} />
+                </BottomSheetView>
+            )}
             <BottomSheetView style={{ height: 50, width: "100%" }}>
                 <View
                     style={{
@@ -85,7 +83,7 @@ export default function EpisodesDrawer({ title }: EpisodesDrawerProps) {
                         }}
                         numberOfLines={1}
                     >
-                        Episodes:{currentEpisode}
+                        Episodes:{currentEpisode?.number}
                     </Text>
                     <View style={{ flexDirection: "row" }}>
                         <Button
@@ -134,14 +132,14 @@ export default function EpisodesDrawer({ title }: EpisodesDrawerProps) {
                                 key={ep.id}
                                 style={{
                                     backgroundColor:
-                                        ep.id === currentEpisode
+                                        ep.id === `${currentEpisode?.id}`
                                             ? "#444"
                                             : "#222",
                                     padding: 30,
                                     display: "flex",
                                     alignItems: "center",
                                 }}
-                                onPress={() => setCurrentEpisode(ep.id)}
+                                onPress={() => setCurrentEpisode(ep)}
                             >
                                 <Text>Episodes-{ep.number}</Text>
                             </Pressable>
