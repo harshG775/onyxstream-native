@@ -17,7 +17,7 @@ export const CMT = axios.create({
     },
 });
 
-export async function getSearchResult(query: string, number: number) {
+export async function getSearchResult(query: string, number = 1) {
     const { data } = await CMT.get<SearchResponseType>(
         `/${query}?page=${number}`,
     );
